@@ -1,0 +1,5 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "appService.defaultWebAppToDeploy": "/subscriptions/14e87e92-e026-45f3-8cb3-a314b50c16b0/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/tis3-site",
+    "appService.deploySubpath": "Codigo\\sistema\\target\\fazendatamarana.jar"
+}

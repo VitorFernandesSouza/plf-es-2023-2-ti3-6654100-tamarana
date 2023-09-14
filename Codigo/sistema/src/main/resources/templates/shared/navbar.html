@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light p-3" th:fragment="navbar">
+  <div class="container-fluid menu" style="margin-right: 5vw;">
+    <div class="logo">
+      <center>
+        <a href="#"> <span>Sítio</span> Tamarana</a>
+      </center>
+
+    </div> <br>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="efeito navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="item nav-link mx-2 active" aria-current="page" href="#">Produtos</a>
+        </li>
+        <li class="nav-item">
+          <a class="item nav-link mx-2" href="#">Contato</a>
+        </li>
+        <li class="nav-item">
+          <a class="item nav-link mx-2" href="#">Fotos</a>
+        </li>
+        <li class="nav-item">
+          <a class="item nav-link mx-2" href="#">Sobre</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="item nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li th:if="${logado != true}"><a class="dropdown-item" href="cadastro">Criar conta</a></li>
+            <li th:if="${logado != true}"><a class="dropdown-item" href="login">Fazer login</a></li>
+            <li th:if="${logado == true}"><a class="dropdown-item" href="/perfil">Meu perfil</a></li>
+            <li><a class="dropdown-item" href="#">Dúvidas frequentes</a></li>
+            <li th:if="${logado == true}"><a class="dropdown-item" href="/sair">Sair</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

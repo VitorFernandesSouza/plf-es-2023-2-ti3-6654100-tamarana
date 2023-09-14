@@ -1,0 +1,90 @@
+body {
+    background: WHITE;
+    background: linear-gradient(to right, #006400, #006400);
+    font-family: 'Open Sans', sans-serif;
+    line-height: 54px;
+    font-size: 16px;
+    color: white;
+}
+body::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: green;
+    clip-path: polygon(86% 0, 100% 0, 100% 100%, 60% 100%);
+  }
+
+
+/*  ------------------ CSS NAV BAR -------------------- */
+.controle {
+    font-size: large;
+  }
+
+
+  #logo {
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+  }
+  
+  @media (max-width:500px) {
+    #logo {
+      text-decoration: none;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+    }
+  }
+  
+  
+  .nav-links {
+    text-decoration: none !important;
+    color: white !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    padding: 8px 15px !important;
+    border-radius: 5px !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .nav-icon {
+    color: black !important;
+  }
+  
+  
+  .nav-icon:hover {
+    color: green !important;
+    
+  }
+  
+  .espacamentoitens {
+    padding: 40px 20px 0 0;
+  }
+  
+  .efeito a:hover {
+    background: white;
+    color: black !important;
+  }
+
+  a span {
+    display: block;
+    text-align: center;
+  }
+
+/* ------------------------------ CSS LOGIN ------------------------------*/
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    background-color: #00aa41 !important;
+    border-color: #00aa41 !important;
+}
+  
+.btn-login:hover {
+    background-color: #02692a !important;
+}

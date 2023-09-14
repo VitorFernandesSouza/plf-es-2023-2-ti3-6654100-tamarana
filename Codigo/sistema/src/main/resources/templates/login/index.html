@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazenda Tamarana - Login</title>
+    <script src="https://kit.fontawesome.com/cb3fc013e7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+  
+    <nav class="navbar navbar-expand-xxl" style="margin-bottom: 10px;">
+      <div class="container-fluid">
+        <div class="navbar-brand" style="padding-left: 10px;">
+          <center>
+              <a href="/" id="logo"> <span>Sítio</span> Tamarana</a>
+          </center>
+         
+        </div> <br>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="color: white;">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+          </button>
+          <div class="collapse navbar-collapse " id="navbarNavDropdown">
+              <ul class="navbar-nav ms-auto controle">
+                  <li class="nav-item espacamentoitens efeito">
+                      <a class="nav-link nav-links" aria-current="page" href="#">Produtos</a>
+                  </li>
+                  <li class="nav-item espacamentoitens efeito">
+                      <a class="nav-link nav-links" href="#">Contato</a>
+                  </li>
+                  <li class="nav-item espacamentoitens efeito">
+                      <a class="nav-link nav-links" href="#">Fotos</a>
+                  </li>
+                  <li class="nav-item espacamentoitens efeito">
+                    <a class="nav-link nav-links" href="#">Sobre</a>
+                </li>
+                  <li class="nav-items efeito dropdown espacamentoitens">
+                      <a class="nav-link nav-links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  
+                          aria-expanded="false">
+                          <i class="fas fa-user"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li th:if="${logado != true}"><a class="dropdown-item" href="cadastro">Criar conta</a></li>
+                        <li th:if="${logado != true}"><a class="dropdown-item" href="login">Fazer login</a></li>
+                        <li th:if="${logado == true}"><a class="dropdown-item" href="/perfil">Meu perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Dúvidas frequentes</a></li>
+                        <li th:if="${logado == true}"><a class="dropdown-item" href="/sair" onclick="return confirm('Deseja realmente sair?')">Sair</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+    <div class="container conteudo">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+              <div class="card-body p-4 p-sm-5">
+                <h2 class="card-title text-center mb-5 fw-light fs-1">Login</h2>
+                <form method="POST" action="/logar"> <!-- method post: metodo para enviar dados | action: executar acao /login (metodo logar) definida no LoginController -->
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" name="email" required>
+                    <label for="floatingInput">Email</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="senha" required>
+                    <label for="floatingPassword">Senha</label>
+                  </div>
+    
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="lembrar" name="lembrar">
+                    <label class="form-check-label" for="lembrar">
+                      Lembrar senha
+                    </label>
+                  </div>
+                  <div th:if="${erro != null}" th:text="${erro}" class="alert alert-danger" role="alert"></div>
+                  <div class="d-grid">
+                    <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Entrar</button>
+                  </div>
+
+                  <a class="d-block text-center mt-2 small" href="cadastro">Não possui uma conta? Criar conta</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

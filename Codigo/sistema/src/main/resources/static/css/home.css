@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 54px;
+  font-size: 16px;
+  color: white;
+}
+
+::selection {
+  color: #000;
+  background: #fff;
+}
+
+/* ------------------------ NAV BAR ------------------------------------------ */
+
+.controle {
+  font-size: large;
+
+}
+
+#logo {
+  text-decoration: none;
+  color: green;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+@media (max-width:500px) {
+  #logo {
+    text-decoration: none;
+    color: green;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
+
+
+.nav-links {
+  text-decoration: none !important;
+  color: green !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  padding: 8px 15px !important;
+  border-radius: 5px !important;
+  transition: all 0.3s ease !important;
+}
+
+.nav-icon {
+  color: black !important;
+}
+
+
+.nav-icon:hover {
+  color: green !important;
+}
+
+.espacamentoitens {
+  padding: 40px 20px 0 0;
+}
+
+.efeito a:hover {
+  background: green;
+  color: rgb(255, 255, 255) !important;
+}
+
+/* ------------------------ CONTEUDO ------------------------------------------ */
+
+
+.content .text {
+  margin-left: 5px;
+  position: relative;
+  max-width: 100%;
+  margin: 20px 0;
+}
+
+.content .text h2 {
+  margin-left: 15px;
+  color: #121212;
+  font-size: 2vw;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .content .text h2 {
+    margin-left: 15px;
+    color: #121212;
+    font-size: 2vw;
+    margin-bottom: 10px;
+    font-weight: 700;
+
+  }
+
+  .content .text h2 span {
+    margin-left: 5px;
+    font-size: 4vw;
+    color: green;
+  }
+}
+
+@media (max-width: 500px) {
+  .content .text h2 {
+    margin-left: 15px;
+    color: #121212;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+
+  }
+
+  #help {
+    font-size: 3.5rem;
+  }
+  
+
+}
+
+a span {
+  display: block;
+  text-align: center;
+}
+
+
+.content .text h2 span {
+  margin-left: 5px;
+  font-size: 6vw;
+  color: green;
+}
+
+.content .text p {
+  color: #121212;
+}
+
+.content .text a {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 1vw 4vw;
+  background: green;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: 0.3s ease-in-out;
+}
+
+.content .text a:hover {
+  transform: translateY(-10px);
+}
+
+
+
+.services {
+  padding: 90px 0;
+}
+
+.title h2 {
+  font-weight: 600;
+  font-size: 35px;
+  color: #232323;
+}
+
+.title p {
+  color: black;
+  margin: 0 auto;
+}
+
+.services .service-block.color-bg {
+  background: green;
+  color: #fff;
+}
+
+.services .service-block .service-icon {
+  margin-bottom: 30px;
+}
+
+.services .service-block.color-bg i,
+.services .service-block.color-bg h3,
+.services .service-block.color-bg p {
+  color: #fff;
+}
+
+.services .service-block h3 {
+  color: #fff;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.services .service-block p {
+  font-size: 14px;
+  color: #fff;
+}
+
+.services .service-block h3 {
+  color: black;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.services .service-block p {
+  font-size: 14px;
+  color: black;
+}
+
+.services .service-block.color-bg i,
+.services .service-block.color-bg h3,
+.services .service-block.color-bg p {
+  color: #fff;
+}
+
+.services .service-block i {
+  font-size: 40px;
+  color: green;
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: green;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
