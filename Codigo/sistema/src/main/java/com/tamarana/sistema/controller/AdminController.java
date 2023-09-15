@@ -41,7 +41,7 @@ public class AdminController {
     @GetMapping("/admin/gerenciarUsuarios")
     public String gerenciarUsuarios(Model model, HttpServletRequest request) {
         String roleAdmin = CookieService.getCookie(request, "role");
-        String id_admin = CookieService.getCookie(request, "id_usuario");
+        String id_admin = CookieService.getCookie(request, "id");
         String emailAdmin = CookieService.getCookie(request, "emailUsuario");
         String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
         String sobrenomeAdmin = CookieService.getCookie(request, "sobrenomeUsuario");
@@ -108,6 +108,22 @@ public class AdminController {
     public String removerUsuario(@PathVariable int id) {
         try {
             rep.deleteById(id);
+        } catch (NonTransientDataAccessException e) {
+            e.printStackTrace();
+        } 
+        return "redirect:/admin/gerenciarUsuarios";
+    }
+
+    @PostMapping("/admin/editarUsuario")
+    public String eiditarUsuario(Usuario usuarioParam) {
+        try { 
+            Usuario usuario = rep.getReferenceById(usuarioParam.getId());  
+            if (usuario != null) {
+                if (usuarioParam.getSenha().length() == 0) {
+                    usuarioParam.setSenha(usuario.getSenha());
+                }
+                rep.save(usuarioParam);
+            }
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
         } 

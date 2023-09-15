@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 @Table(name="usuario")
 @Entity(name="usuario")
 public class Usuario {
-    @Id
+    @Id 
     private int id;
     private String primeiro_nome;
     private String sobrenome;
@@ -72,8 +72,8 @@ public class Usuario {
         return this.id;
     }
 
-    public void setId(int id_usuario) {
-        this.id = id_usuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRole() {
