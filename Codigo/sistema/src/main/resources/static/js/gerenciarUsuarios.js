@@ -5,9 +5,5 @@ function receberDados(email, nome, sobrenome, role, id) {
     document.getElementById("modelSobrenome").value = sobrenome;
     document.getElementById("modelRole").value = role;
     document.getElementById("modelId").value = id;
-
-    
-  
-
     modelEditar.show(modelEditar);
 }
