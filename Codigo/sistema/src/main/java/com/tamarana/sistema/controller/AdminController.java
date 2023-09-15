@@ -3,10 +3,14 @@ package com.tamarana.sistema.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.NonTransientDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tamarana.sistema.model.usuario.Usuario;
@@ -43,6 +47,9 @@ public class AdminController {
         String sobrenomeAdmin = CookieService.getCookie(request, "sobrenomeUsuario");
        
         if (roleAdmin.equals("admin")){
+            List<Usuario> listaUsuarios = (List<Usuario>)rep.findAll();
+            model.addAttribute("listaUsuarios", listaUsuarios);
+            
             model.addAttribute("roleAdmin", roleAdmin);
             model.addAttribute("id_admin", id_admin);
             model.addAttribute("emailAdmin", emailAdmin);
@@ -60,7 +67,7 @@ public class AdminController {
         if (admin != null) {
             if (admin.getRole().equals("admin")) {
                 int tempoLogado = 60*60;
-                CookieService.setCookie(response, "id_usuario", String.valueOf(admin.getId_usuario()), tempoLogado);
+                CookieService.setCookie(response, "id", String.valueOf(admin.getId()), tempoLogado);
                 CookieService.setCookie(response, "emailUsuario", admin.getEmail(), tempoLogado);
                 CookieService.setCookie(response, "nomeUsuario", admin.getNome(), tempoLogado);
                 CookieService.setCookie(response, "sobrenomeUsuario", admin.getSobrenome(), tempoLogado);
@@ -75,12 +82,36 @@ public class AdminController {
 
     @GetMapping("/adminSair")
     public String sair(HttpServletResponse response) {
-        CookieService.setCookie(response, "id_usuario", "", 0);
+        CookieService.setCookie(response, "id", "", 0);
         CookieService.setCookie(response, "emailUsuario", "", 0);
         CookieService.setCookie(response, "nomeUsuario", "", 0);
         CookieService.setCookie(response, "sobrenomeUsuario", "", 0);
         CookieService.setCookie(response, "role", "", 0);
         return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/cadastrarUsuario")
+    public String cadastrarUsuario(Usuario usuarioParam, Model model) {
+        try {
+            System.out.println(usuarioParam.getEmail());
+            System.out.println(usuarioParam.getNome());
+            System.out.println(usuarioParam.getSobrenome());
+            System.out.println(usuarioParam.getRole());
+            rep.save(usuarioParam);
+        } catch (NonTransientDataAccessException e) {
+            e.printStackTrace();
+        } 
+        return "redirect:/admin/gerenciarUsuarios";
+    }
+
+    @GetMapping("/admin/{id}/removerUsuario")
+    public String removerUsuario(@PathVariable int id) {
+        try {
+            rep.deleteById(id);
+        } catch (NonTransientDataAccessException e) {
+            e.printStackTrace();
+        } 
+        return "redirect:/admin/gerenciarUsuarios";
     }
 
 

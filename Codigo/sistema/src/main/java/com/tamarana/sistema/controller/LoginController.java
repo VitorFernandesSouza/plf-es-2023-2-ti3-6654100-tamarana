@@ -26,7 +26,7 @@ public class LoginController {
         
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request) {
-        String id = CookieService.getCookie(request, "id_usuario");
+        String id = CookieService.getCookie(request, "id");
         if (id != null) {
             return "redirect:/perfil";
         }
@@ -39,7 +39,7 @@ public class LoginController {
         if (usuario != null) {
             int tempoLogado = 60*60;
             if (lembrar != null) tempoLogado = (60*60*24*365); // se lembrar senha, dura 1 ano
-            CookieService.setCookie(response, "id_usuario", String.valueOf(usuario.getId_usuario()), tempoLogado);
+            CookieService.setCookie(response, "id", String.valueOf(usuario.getId()), tempoLogado);
             CookieService.setCookie(response, "emailUsuario", usuario.getEmail(), tempoLogado);
             CookieService.setCookie(response, "nomeUsuario", usuario.getNome(), tempoLogado);
             CookieService.setCookie(response, "sobrenomeUsuario", usuario.getSobrenome(), tempoLogado);
@@ -54,7 +54,7 @@ public class LoginController {
 
     @GetMapping("/sair")
     public String sair(HttpServletResponse response) {
-        CookieService.setCookie(response, "id_usuario", "", 0);
+        CookieService.setCookie(response, "id", "", 0);
         CookieService.setCookie(response, "emailUsuario", "", 0);
         CookieService.setCookie(response, "nomeUsuario", "", 0);
         CookieService.setCookie(response, "sobrenomeUsuario", "", 0);

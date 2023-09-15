@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 @Entity(name="usuario")
 public class Usuario {
     @Id
-    private int id_usuario;
+    private int id;
     private String primeiro_nome;
     private String sobrenome;
     private String email;
@@ -16,17 +16,24 @@ public class Usuario {
     private String role;
 
 
-    public Usuario(int id_usuario, String email, String nome, String sobrenome, String senha) {
-        this.id_usuario = id_usuario;
+    public Usuario(String email, String nome, String sobrenome, String senha) {
         this.email = email;
         this.primeiro_nome = nome;
         this.sobrenome = sobrenome;
         this.senha = senha;
-        this.role = "usuario";
+        this.role = "cliente";
+    }
+
+    public Usuario(String email, String nome, String sobrenome, String senha, String role) {
+        this.email = email;
+        this.primeiro_nome = nome;
+        this.sobrenome = sobrenome;
+        this.senha = senha;
+        this.role = role;
     }
 
     public Usuario() {
-        this.role = "usuario";
+        this.role = "cliente";
     }
 
     public String getEmail() {
@@ -61,17 +68,32 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public int getId_usuario() {
-        return this.id_usuario;
+    public int getId() {
+        return this.id;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId(int id_usuario) {
+        this.id = id_usuario;
     }
 
     public String getRole() {
         return this.role;
     }
 
+    public void setRole(String role) {
+        this.role=role;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", primeiro_nome='" + getNome() + "'" +
+            ", sobrenome='" + getSobrenome() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", senha='" + getSenha() + "'" +
+            ", role='" + getRole() + "'" +
+            "}";
+    }
 
 }
