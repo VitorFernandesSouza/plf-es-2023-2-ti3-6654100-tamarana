@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.tamarana.sistema.model.Produto;
 import com.tamarana.sistema.model.usuario.Usuario;
+import com.tamarana.sistema.repositories.ProdutoRep;
 import com.tamarana.sistema.repositories.UserRepository;
 import com.tamarana.sistema.services.CookieService;
 
@@ -25,7 +27,10 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AdminController {
 
     @Autowired
-    private UserRepository rep;
+    private UserRepository repUsuario;
+
+    @Autowired
+    private ProdutoRep repProduto;
 
 
     @GetMapping("/admin")
@@ -47,7 +52,7 @@ public class AdminController {
         String sobrenomeAdmin = CookieService.getCookie(request, "sobrenomeUsuario");
        
         if (roleAdmin.equals("admin")){
-            List<Usuario> listaUsuarios = (List<Usuario>)rep.findAll();
+            List<Usuario> listaUsuarios = (List<Usuario>)repUsuario.findAll();
             model.addAttribute("listaUsuarios", listaUsuarios);
             
             model.addAttribute("roleAdmin", roleAdmin);
@@ -63,7 +68,7 @@ public class AdminController {
 
     @PostMapping("/adminLogar")
     public String logar(Model model, Usuario usuarioParam, HttpServletResponse response) {
-        Usuario admin = this.rep.Login(usuarioParam.getEmail(), usuarioParam.getSenha());
+        Usuario admin = this.repUsuario.Login(usuarioParam.getEmail(), usuarioParam.getSenha());
         if (admin != null) {
             if (admin.getRole().equals("admin")) {
                 int tempoLogado = 60*60;
@@ -97,7 +102,7 @@ public class AdminController {
             System.out.println(usuarioParam.getNome());
             System.out.println(usuarioParam.getSobrenome());
             System.out.println(usuarioParam.getRole());
-            rep.save(usuarioParam);
+            repUsuario.save(usuarioParam);
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
         } 
@@ -107,7 +112,7 @@ public class AdminController {
     @GetMapping("/admin/{id}/removerUsuario")
     public String removerUsuario(@PathVariable int id) {
         try {
-            rep.deleteById(id);
+            repUsuario.deleteById(id);
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
         } 
@@ -117,17 +122,57 @@ public class AdminController {
     @PostMapping("/admin/editarUsuario")
     public String eiditarUsuario(Usuario usuarioParam) {
         try { 
-            Usuario usuario = rep.getReferenceById(usuarioParam.getId());  
+            Usuario usuario = repUsuario.getReferenceById(usuarioParam.getId());  
             if (usuario != null) {
                 if (usuarioParam.getSenha().length() == 0) {
                     usuarioParam.setSenha(usuario.getSenha());
                 }
-                rep.save(usuarioParam);
+                repUsuario.save(usuarioParam);
             }
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
         } 
         return "redirect:/admin/gerenciarUsuarios";
+    }
+
+    @GetMapping("/admin/gerenciarProdutos")
+    public String gerenciarProdutos(Model model, HttpServletRequest request) {
+        String roleAdmin = CookieService.getCookie(request, "role");
+        String id_admin = CookieService.getCookie(request, "id");
+        String emailAdmin = CookieService.getCookie(request, "emailUsuario");
+        String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
+        String sobrenomeAdmin = CookieService.getCookie(request, "sobrenomeUsuario");
+       
+        if (roleAdmin.equals("admin")){
+            List<Produto> listaProdutos = (List<Produto>)repProduto.findAll();
+            model.addAttribute("listaProdutos", listaProdutos);
+            for (Produto p : listaProdutos) {
+                System.out.println(p.getDescricao());
+            }
+            
+            model.addAttribute("roleAdmin", roleAdmin);
+            model.addAttribute("id_admin", id_admin);
+            model.addAttribute("emailAdmin", emailAdmin);
+            model.addAttribute("nomeAdmin", nomeAdmin);
+            model.addAttribute("sobrenomeAdmin", sobrenomeAdmin);
+            return "admin/gerenciarProdutos";
+        }
+        return "admin/login";
+        
+    }
+
+    @PostMapping("/admin/cadastrarProduto")
+    public String cadastrarProduto(Produto produtoParam, Model model) {
+        try {
+            System.out.println(produtoParam.getNome());
+            System.out.println(produtoParam.getDescricao());
+            System.out.println(produtoParam.getPreco());
+            System.out.println(produtoParam.getQuantidade());
+            repProduto.save(produtoParam);
+        } catch (NonTransientDataAccessException e) {
+            e.printStackTrace();
+        } 
+        return "redirect:/admin/gerenciarProdutos";
     }
 
 

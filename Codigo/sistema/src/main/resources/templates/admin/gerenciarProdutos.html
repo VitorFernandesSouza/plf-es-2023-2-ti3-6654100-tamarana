@@ -11,7 +11,7 @@
     <link th:href="@{/css/gerenciarUsuarios.css}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4269015da9.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/gerenciarUsuarios.js}"></script>
+
 
 </head>
 
@@ -22,7 +22,7 @@
                 $("#wrapper").toggleClass("toggled");
             });
         }) 
-    </script>   
+    </script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <div id="wrapper" class="wrapper-content">
         <div id="sidebar-wrapper">
@@ -33,11 +33,12 @@
                     </a>
                 </li>
                 <li class="sidebar-opcao">
-                    <a href="/admin/gerenciarUsuarios" style="background-color: green; color: white;">Gerenciar
+                    <a href="/admin/gerenciarUsuarios" style="color: black;">Gerenciar
                         Usuários</a>
                 </li>
                 <li class="sidebar-opcao">
-                    <a href="/admin/gerenciarProdutos" style="color: black;">Gerenciar Produtos</a>
+                    <a href="/admin/gerenciarProdutos" style="background-color: green; color: white;">Gerenciar
+                        Produtos</a>
                 </li>
                 <li class="sidebar-opcao">
                     <a href="#" style="color: black;">Histórico de vendas</a>
@@ -65,12 +66,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Gerenciar Usuários</h1>
+                        <h1>Gerenciar Produtos</h1>
                         <p></p>
-                        <p>Abaixo é possível ver, editar, remover e criar usuários</p>
+                        <p>Abaixo é possível ver, editar, remover e cadastrar produtos</p>
                         <div class="card shadow mb-4">
                             <div class="card-header py-4">
-                                <h6 class="m-0 font-weight-bold text-primary">Lista de usuários</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Lista de produtos</h6>
                                 <div class="card-body" style="padding-left: 0 !important;">
                                     <div class="table-responsive-sm">
                                         <div class="table table-bordered">
@@ -79,38 +80,40 @@
                                                     <tr>
                                                         <th class="topo"><span>Id</span></th>
                                                         <th class="topo"><span>Nome</span></th>
-                                                        <th class="topo"><span>Função</span></th>
-                                                        <th class="topo"><span>Email</span></th>
+                                                        <th class="topo"><span>Descrição</span></th>
+                                                        <th class="topo"><span>Preço(R$/KG)</span></th>
+                                                        <th class="topo"><span>Quantidade</span></th>
                                                         <th class="topo"><span>Ações</span></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr th:each="usuario : ${listaUsuarios}">
-                                                        <td th:text="${usuario.id}"></td>
+                                                    <tr th:each="produto : ${listaProdutos}">
+                                                        <td th:text="${produto.id}"></td>
                                                         <td>
-                                                            <span th:text="${usuario.nome}"></span> <span
-                                                                th:text="${usuario.sobrenome}"></span>
+                                                            <span th:text="${produto.nome}"></span>
                                                         </td>
-                                                        <td><span th:text="${usuario.role}"></span> </td>
+                                                        <td><span th:text="${produto.descricao}"></span> </td>
                                                         <td>
-                                                            <span th:text="${usuario.email}"></span>
+                                                            <span th:text="${produto.preco}"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span th:text="${produto.quantidade}"></span>
                                                         </td>
                                                         <td style="width: 20%;">
                                                             <!-- th:href="@{'/admin/' + ${usuario.id}}" -->
                                                             <a type="button" style="margin-right: 6px;"
-                                                                th:data-email="${usuario.email}"
-                                                                th:data-nome="${usuario.nome}"
-                                                                th:data-sobrenome="${usuario.sobrenome}"
-                                                                th:data-role="${usuario.role}"
-                                                                th:data-id="${usuario.id}"
-                                                                th:onclick="receberDados(this.getAttribute('data-email'),this.getAttribute('data-nome'),this.getAttribute('data-sobrenome'),this.getAttribute('data-role'),this.getAttribute('data-id'))"
-                                                                ><i
+                                                                th:data-id="${produto.id}"
+                                                                th:data-nome="${produto.nome}"
+                                                                th:data-descricao="${produto.descricao}"
+                                                                th:data-preco="${produto.preco}"
+                                                                th:data-quantidade="${produto.quantidade}"
+                                                                th:onclick="receberDados(this.getAttribute('data-email'),this.getAttribute('data-nome'),this.getAttribute('data-sobrenome'),this.getAttribute('data-role'),this.getAttribute('data-id'))"><i
                                                                     class="fa-solid fa-pen-to-square fa-lg"
                                                                     style="color: #f5f113;" title="Editar"></i></a>
-                                                            <a href="#"
+                                                            <!--  <a href="#"
                                                                 th:onclick="'if(confirm(\'Remover usuário?\')) {window.location.href = \'' + @{/admin/{id}(id=${usuario.id})} + '/removerUsuario\'}'"><i
                                                                     class="fa-solid fa-trash fa-lg"
-                                                                    style="color: #f00000;" title="Remover"></i></a>
+                                                                    style="color: #f00000;" title="Remover"></i></a>-->
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -122,48 +125,47 @@
                         </div>
                         <div th:if="${erro != null}" th:text="${erro}" class="alert alert-danger" role="alert"></div>
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                            data-bs-target="#novousuario"> Cadastrar novo usuário</button>
+                            data-bs-target="#novoproduto"> Cadastrar novo produto</button>
 
-                        <!-- Modal novo usuário -->
-                        <div class="modal fade" id="novousuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <!-- Modal novo produto -->
+                        <div class="modal fade" id="novoproduto" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar novo usuário</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar novo produto</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="/admin/cadastrarUsuario">
-                                            <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" name="email" required>
-                                                <label for="floatingInputEmail">Email</label>
+                                        <form method="POST" action="/admin/cadastrarProduto">
+                                            <div class="mb-3">
+                                                <label for="nome-produto" class="col-form-label">Nome</label>
+                                                <input type="text" class="form-control" id="nome-produto" name="nome">
                                             </div>
-
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" name="nome" required>
-                                                <label for="floatingPassword">Primeiro nome</label>
+                                            <div class="mb-3">
+                                                <label for="descricao-produto" class="col-form-label">Descrição</label>
+                                                <textarea class="form-control" id="descricao-produto"
+                                                    name="descricao"></textarea>
                                             </div>
+                                            <div class="row">
+                                                <div class="mb-3 col-6">
+                                                    <label for="preco-produto" class="col-form-label">Preço
+                                                        (R$/KG)</label>
+                                                    <input type="number" class="form-control" id="preco-produto"
+                                                        name="preco">
 
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" name="sobrenome" required>
-                                                <label for="floatingPasswordConfirm">Sobrenome</label>
+                                                </div>
+                                                <div class="mb-3 col-6">
+                                                    <label for="quantidade-produto"
+                                                        class="col-form-label">Quantidade</label>
+                                                    <input type="number" class="form-control" id="quantidade-produto"
+                                                        name="quantidade">
+                                                </div>
                                             </div>
-
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" name="senha" required>
-                                                <label for="floatingPasswordConfirm">Senha</label>
-                                            </div>
-
-                                            <select class="form-select" name="role" style="margin-bottom: 10px;">
-                                                <option value="cliente" selected>Cliente</option>
-                                                <option value="funcionario">Funcionário</option>
-                                                <option value="admin">Administrador</option>
-                                            </select>
                                             <div class="text-end">
-                                                <button class="btn btn-md btn-primary btn-login"
-                                                    type="submit">Criar</button>
+                                                <button type="submit"
+                                                    class="btn btn-md btn-primary btn-login">Cadastrar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -187,17 +189,20 @@
                                                 <label for="floatingInputEmail">ID</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" name="email" id="modelEmail" required>
+                                                <input type="email" class="form-control" name="email" id="modelEmail"
+                                                    required>
                                                 <label for="floatingInputEmail">Email</label>
                                             </div>
 
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="modelNome" name="nome" required>
+                                                <input type="text" class="form-control" id="modelNome" name="nome"
+                                                    required>
                                                 <label for="floatingPassword">Primeiro nome</label>
                                             </div>
 
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="modelSobrenome" name="sobrenome" required>
+                                                <input type="text" class="form-control" id="modelSobrenome"
+                                                    name="sobrenome" required>
                                                 <label for="floatingPasswordConfirm">Sobrenome</label>
                                             </div>
 
@@ -206,7 +211,8 @@
                                                 <label for="floatingPasswordConfirm">Senha</label>
                                             </div>
 
-                                            <select class="form-select" name="role" id="modelRole" style="margin-bottom: 10px;">
+                                            <select class="form-select" name="role" id="modelRole"
+                                                style="margin-bottom: 10px;">
                                                 <option value="cliente" selected>Cliente</option>
                                                 <option value="funcionario">Funcionário</option>
                                                 <option value="admin">Administrador</option>
