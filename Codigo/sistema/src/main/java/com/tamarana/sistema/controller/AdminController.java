@@ -178,5 +178,18 @@ public class AdminController {
         return "redirect:/admin/gerenciarProdutos"; 
     }
 
+    @PostMapping("/admin/editarProduto")
+    public String eiditarProduto(Produto produtoParam) {
+        try { 
+            Produto produto = repProduto.getReferenceById(produtoParam.getId());  
+            if (produto != null) {
+                repProduto.save(produtoParam);
+            }
+        } catch (NonTransientDataAccessException e) {
+            e.printStackTrace();
+        } 
+        return "redirect:/admin/gerenciarProdutos";
+    }
+
 
 }

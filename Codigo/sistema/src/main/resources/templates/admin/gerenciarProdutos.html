@@ -11,6 +11,7 @@
     <link th:href="@{/css/gerenciarUsuarios.css}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4269015da9.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/gerenciarProdutos.js}"></script>
 
 
 </head>
@@ -107,7 +108,7 @@
                                                                 th:data-descricao="${produto.descricao}"
                                                                 th:data-preco="${produto.preco}"
                                                                 th:data-quantidade="${produto.quantidade}"
-                                                                th:onclick="receberDados(this.getAttribute('data-email'),this.getAttribute('data-nome'),this.getAttribute('data-sobrenome'),this.getAttribute('data-role'),this.getAttribute('data-id'))"><i
+                                                                th:onclick="receberDados(this.getAttribute('data-id'),this.getAttribute('data-nome'),this.getAttribute('data-descricao'),this.getAttribute('data-preco'),this.getAttribute('data-quantidade'))"><i
                                                                     class="fa-solid fa-pen-to-square fa-lg"
                                                                     style="color: #f5f113;" title="Editar"></i></a>
                                                              <a href="#"
@@ -139,29 +140,31 @@
                                     </div>
                                     <div class="modal-body">
                                         <form method="POST" action="/admin/cadastrarProduto">
-                                            <div class="mb-3">
-                                                <label for="nome-produto" class="col-form-label">Nome</label>
-                                                <input type="text" class="form-control" id="nome-produto" name="nome">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" id="nome-produto" name="nome" required>
+                                                <label for="floatingInputEmail">Nome</label>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="descricao-produto" class="col-form-label">Descrição</label>
-                                                <textarea class="form-control" id="descricao-produto"
-                                                    name="descricao"></textarea>
-                                            </div>
-                                            <div class="row">
-                                                <div class="mb-3 col-6">
-                                                    <label for="preco-produto" class="col-form-label">Preço
-                                                        (R$/KG)</label>
-                                                    <input type="number" class="form-control" id="preco-produto"
-                                                        name="preco">
 
+                                            <div class="form-floating mb-3">
+                                                <textarea class="form-control" id="descricao-produto"
+                                                    name="descricao" style="height: 100px;"></textarea>
+                                                    <label for="descricao-produto">Descrição</label>
+                                                    
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="form-floating mb-3 col-6">
+                                                    <input type="number" step="0.01" class="form-control" id="preco-produto"
+                                                    name="preco" required>
+                                                    <label for="preco-produto" style="margin-left: 12px;">Preço(R$/KG)</label>
                                                 </div>
-                                                <div class="mb-3 col-6">
-                                                    <label for="quantidade-produto"
-                                                        class="col-form-label">Quantidade</label>
+
+                                                <div class="form-floating mb-3 col-6">
                                                     <input type="number" class="form-control" id="quantidade-produto"
-                                                        name="quantidade">
+                                                        name="quantidade" required>
+                                                    <label for="quantidade-produto" style="margin-left: 12px;">Quantidade</label>
                                                 </div>
+
                                             </div>
                                             <div class="text-end">
                                                 <button type="submit"
@@ -172,51 +175,44 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal editar usuário -->
-                        <div class="modal fade" id="editarusuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <!-- Modal editar produto -->
+                        <div class="modal fade" id="editarproduto" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Editar usuário</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Editar produto</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="/admin/editarUsuario">
+                                        <form method="POST" action="/admin/editarProduto">
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" name="id" id="modelId" readonly>
                                                 <label for="floatingInputEmail">ID</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" name="email" id="modelEmail"
+                                                <input type="text" class="form-control" name="nome" id="modelNome"
                                                     required>
-                                                <label for="floatingInputEmail">Email</label>
+                                                <label for="floatingInputEmail">Nome</label>
                                             </div>
 
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="modelNome" name="nome"
-                                                    required>
-                                                <label for="floatingPassword">Primeiro nome</label>
+                                                <textarea type="text" class="form-control" id="modelDescricao" name="descricao" style="height: 100px;"
+                                                    required></textarea>
+                                                <label for="floatingPassword">Descricao</label>
                                             </div>
 
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="modelSobrenome"
-                                                    name="sobrenome" required>
-                                                <label for="floatingPasswordConfirm">Sobrenome</label>
+                                                <input type="number" step="0.01" class="form-control" id="modelPreco"
+                                                    name="preco" required>
+                                                <label>Preço</label>
                                             </div>
 
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" name="senha">
-                                                <label for="floatingPasswordConfirm">Senha</label>
+                                                <input type="number" class="form-control" name="quantidade" id="modelQuantidade" required>
+                                                <label >Quantidade</label>
                                             </div>
-
-                                            <select class="form-select" name="role" id="modelRole"
-                                                style="margin-bottom: 10px;">
-                                                <option value="cliente" selected>Cliente</option>
-                                                <option value="funcionario">Funcionário</option>
-                                                <option value="admin">Administrador</option>
-                                            </select>
                                             <div class="text-end">
                                                 <button class="btn btn-md btn-primary btn-login"
                                                     type="submit">Editar</button>
