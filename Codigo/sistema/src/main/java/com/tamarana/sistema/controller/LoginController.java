@@ -46,9 +46,7 @@ public class LoginController {
             CookieService.setCookie(response, "role", usuario.getRole(), tempoLogado);
             return "redirect:/perfil";
         }
-
         model.addAttribute("erro", "Usuário ou senha inválidos");
-        
         return "login/index";
     }
 
@@ -61,6 +59,4 @@ public class LoginController {
         CookieService.setCookie(response, "role", "", 0);
         return "redirect:/login";
     }
-
-
 }

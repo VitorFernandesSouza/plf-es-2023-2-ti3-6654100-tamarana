@@ -43,30 +43,9 @@ public class AdminController {
 
     }
 
-    @GetMapping("/admin/gerenciarUsuarios")
-    public String gerenciarUsuarios(Model model, HttpServletRequest request) {
-        String roleAdmin = CookieService.getCookie(request, "role");
-        String id_admin = CookieService.getCookie(request, "id");
-        String emailAdmin = CookieService.getCookie(request, "emailUsuario");
-        String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
-        String sobrenomeAdmin = CookieService.getCookie(request, "sobrenomeUsuario");
-       
-        if (roleAdmin.equals("admin")){
-            List<Usuario> listaUsuarios = (List<Usuario>)repUsuario.findAll();
-            model.addAttribute("listaUsuarios", listaUsuarios);
-            
-            model.addAttribute("roleAdmin", roleAdmin);
-            model.addAttribute("id_admin", id_admin);
-            model.addAttribute("emailAdmin", emailAdmin);
-            model.addAttribute("nomeAdmin", nomeAdmin);
-            model.addAttribute("sobrenomeAdmin", sobrenomeAdmin);
-            return "admin/gerenciarUsuarios";
-        }
-        return "admin/login";
-        
-    }
 
-    @PostMapping("/adminLogar")
+    // LOGIN
+        @PostMapping("/adminLogar")
     public String logar(Model model, Usuario usuarioParam, HttpServletResponse response) {
         Usuario admin = this.repUsuario.Login(usuarioParam.getEmail(), usuarioParam.getSenha());
         if (admin != null) {
@@ -95,13 +74,25 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+
+   // GERENCIAR USUÁRIOS
+    @GetMapping("/admin/gerenciarUsuarios")
+    public String gerenciarUsuarios(Model model, HttpServletRequest request) {
+        String roleAdmin = CookieService.getCookie(request, "role");    
+        String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
+        if (roleAdmin.equals("admin")){
+            List<Usuario> listaUsuarios = (List<Usuario>)repUsuario.findAll();
+            model.addAttribute("listaUsuarios", listaUsuarios);        
+            model.addAttribute("roleAdmin", roleAdmin);
+            model.addAttribute("nomeAdmin", nomeAdmin);
+            return "admin/gerenciarUsuarios";
+        }
+        return "admin/login";
+    }
+
     @PostMapping("/admin/cadastrarUsuario")
     public String cadastrarUsuario(Usuario usuarioParam, Model model) {
         try {
-            System.out.println(usuarioParam.getEmail());
-            System.out.println(usuarioParam.getNome());
-            System.out.println(usuarioParam.getSobrenome());
-            System.out.println(usuarioParam.getRole());
             repUsuario.save(usuarioParam);
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
@@ -135,27 +126,20 @@ public class AdminController {
         return "redirect:/admin/gerenciarUsuarios";
     }
 
+    
+    // GERENCIAR PRODUTOS
     @GetMapping("/admin/gerenciarProdutos")
     public String gerenciarProdutos(Model model, HttpServletRequest request) {
         String roleAdmin = CookieService.getCookie(request, "role");
-        String id_admin = CookieService.getCookie(request, "id");
-        String emailAdmin = CookieService.getCookie(request, "emailUsuario");
         String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
-        String sobrenomeAdmin = CookieService.getCookie(request, "sobrenomeUsuario");
-       
         if (roleAdmin.equals("admin")){
             List<Produto> listaProdutos = (List<Produto>)repProduto.findAll();
             model.addAttribute("listaProdutos", listaProdutos);
-
             model.addAttribute("roleAdmin", roleAdmin);
-            model.addAttribute("id_admin", id_admin);
-            model.addAttribute("emailAdmin", emailAdmin);
             model.addAttribute("nomeAdmin", nomeAdmin);
-            model.addAttribute("sobrenomeAdmin", sobrenomeAdmin);
             return "admin/gerenciarProdutos";
         }
         return "admin/login";
-        
     }
 
     @PostMapping("/admin/cadastrarProduto")

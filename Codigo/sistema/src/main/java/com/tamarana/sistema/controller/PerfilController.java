@@ -12,11 +12,10 @@ public class PerfilController {
 
     @GetMapping("/perfil")
     public String perfil(Model model,HttpServletRequest request) {
-        String cookie = CookieService.getCookie(request, "nomeUsuario");
-        if (cookie != null) {
-
+        String nomeUsuario = CookieService.getCookie(request, "nomeUsuario");
+        if (nomeUsuario != null) {
             model.addAttribute("logado", true);
-             model.addAttribute("nomeUsuario", cookie);
+             model.addAttribute("nomeUsuario", nomeUsuario);
             return "perfil/perfil";
         }
         return "redirect:/login";
