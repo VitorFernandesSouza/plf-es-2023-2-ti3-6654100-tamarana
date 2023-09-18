@@ -32,7 +32,6 @@ public class AdminController {
     @Autowired
     private ProdutoRep repProduto;
 
-
     @GetMapping("/admin")
     public String index(Model model,HttpServletRequest request) {
         String roleAdmin = CookieService.getCookie(request, "role");
