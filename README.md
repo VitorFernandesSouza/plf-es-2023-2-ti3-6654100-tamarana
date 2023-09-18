@@ -6,8 +6,8 @@
 - Cadastro de novos usuários
 - Login de usuários
 - Login de administradores
-- 
-- 
+- Gerenciamento de usuários
+- Gerenciamento de produtos
 - 
 - 
 
