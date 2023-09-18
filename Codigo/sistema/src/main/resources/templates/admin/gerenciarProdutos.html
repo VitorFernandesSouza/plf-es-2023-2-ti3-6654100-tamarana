@@ -110,10 +110,10 @@
                                                                 th:onclick="receberDados(this.getAttribute('data-email'),this.getAttribute('data-nome'),this.getAttribute('data-sobrenome'),this.getAttribute('data-role'),this.getAttribute('data-id'))"><i
                                                                     class="fa-solid fa-pen-to-square fa-lg"
                                                                     style="color: #f5f113;" title="Editar"></i></a>
-                                                            <!--  <a href="#"
-                                                                th:onclick="'if(confirm(\'Remover usuário?\')) {window.location.href = \'' + @{/admin/{id}(id=${usuario.id})} + '/removerUsuario\'}'"><i
+                                                             <a href="#"
+                                                                th:onclick="'if(confirm(\'Remover produto?\')) {window.location.href = \'' + @{/admin/{id}(id=${produto.id})} + '/removerProduto\'}'"><i
                                                                     class="fa-solid fa-trash fa-lg"
-                                                                    style="color: #f00000;" title="Remover"></i></a>-->
+                                                                    style="color: #f00000;" title="Remover"></i></a>
                                                         </td>
                                                     </tr>
                                                 </tbody>

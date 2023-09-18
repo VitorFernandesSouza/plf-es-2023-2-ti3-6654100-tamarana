@@ -146,10 +146,7 @@ public class AdminController {
         if (roleAdmin.equals("admin")){
             List<Produto> listaProdutos = (List<Produto>)repProduto.findAll();
             model.addAttribute("listaProdutos", listaProdutos);
-            for (Produto p : listaProdutos) {
-                System.out.println(p.getDescricao());
-            }
-            
+
             model.addAttribute("roleAdmin", roleAdmin);
             model.addAttribute("id_admin", id_admin);
             model.addAttribute("emailAdmin", emailAdmin);
@@ -164,15 +161,21 @@ public class AdminController {
     @PostMapping("/admin/cadastrarProduto")
     public String cadastrarProduto(Produto produtoParam, Model model) {
         try {
-            System.out.println(produtoParam.getNome());
-            System.out.println(produtoParam.getDescricao());
-            System.out.println(produtoParam.getPreco());
-            System.out.println(produtoParam.getQuantidade());
             repProduto.save(produtoParam);
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
         } 
         return "redirect:/admin/gerenciarProdutos";
+    }
+
+    @GetMapping("/admin/{id}/removerProduto")
+    public String removerProduto(@PathVariable int id) {
+        try {
+            repProduto.deleteById(id);
+        } catch (NonTransientDataAccessException e) {
+            e.printStackTrace();
+        } 
+        return "redirect:/admin/gerenciarProdutos"; 
     }
 
 
