@@ -8,7 +8,7 @@
 - Login de administradores
 - Gerenciamento de usuários
 - Gerenciamento de produtos
-- 
+- Gerenciamento de animais
 - 
 
 ## 👥 Alunos integrantes da equipe
