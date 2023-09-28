@@ -20,8 +20,6 @@ public class LoginInterceptorAppConfig implements WebMvcConfigurer  {
                 "/img/**",
                 "/cadastro",
                 "/cadastrar",
-                "/sucesso",
-                "/infos",
                 "/admin",
                 "/adminLogar",
                 "/",

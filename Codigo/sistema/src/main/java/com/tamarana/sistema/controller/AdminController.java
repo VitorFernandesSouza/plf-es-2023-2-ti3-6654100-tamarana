@@ -44,7 +44,7 @@ public class AdminController {
 
 
     // LOGIN
-        @PostMapping("/adminLogar")
+    @PostMapping("/adminLogar")
     public String logar(Model model, Usuario usuarioParam, HttpServletResponse response) {
         Usuario admin = this.repUsuario.Login(usuarioParam.getEmail(), usuarioParam.getSenha());
         if (admin != null) {
