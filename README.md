@@ -8,7 +8,7 @@
 - Login de administradores
 - Gerenciamento de usuários
 - Gerenciamento de produtos
-- 
+- Gerenciamento de animais
 - 
 
 ## 👥 Alunos integrantes da equipe
@@ -34,8 +34,6 @@
 
 ## Instruções de utilização - na web
 * Acesse https://tis3-site.azurewebsites.net/
-* Para acessar a página de administradores, https://tis3-site.azurewebsites.net/admin e faça login com as seguintes informações:
+* Para acessar a página de administradores, https://tis3-site.azurewebsites.net/admin
   
-email - adm@gmail.com
 
-senha - admin
