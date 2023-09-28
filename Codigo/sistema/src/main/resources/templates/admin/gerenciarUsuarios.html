@@ -22,7 +22,7 @@
                 $("#wrapper").toggleClass("toggled");
             });
         }) 
-    </script>   
+    </script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <div id="wrapper" class="wrapper-content">
         <div id="sidebar-wrapper">
@@ -38,6 +38,9 @@
                 </li>
                 <li class="sidebar-opcao">
                     <a href="/admin/gerenciarProdutos" style="color: black;">Gerenciar Produtos</a>
+                </li>
+                <li class="sidebar-opcao">
+                    <a href="/admin/gerenciarAnimais" style="color: black;">Gerenciar Animais</a>
                 </li>
                 <li class="sidebar-opcao">
                     <a href="#" style="color: black;">Histórico de vendas</a>
@@ -102,8 +105,7 @@
                                                                 th:data-sobrenome="${usuario.sobrenome}"
                                                                 th:data-role="${usuario.role}"
                                                                 th:data-id="${usuario.id}"
-                                                                th:onclick="receberDados(this.getAttribute('data-email'),this.getAttribute('data-nome'),this.getAttribute('data-sobrenome'),this.getAttribute('data-role'),this.getAttribute('data-id'))"
-                                                                ><i
+                                                                th:onclick="receberDados(this.getAttribute('data-email'),this.getAttribute('data-nome'),this.getAttribute('data-sobrenome'),this.getAttribute('data-role'),this.getAttribute('data-id'))"><i
                                                                     class="fa-solid fa-pen-to-square fa-lg"
                                                                     style="color: #f5f113;" title="Editar"></i></a>
                                                             <a href="#"
@@ -186,17 +188,20 @@
                                                 <label for="floatingInputEmail">ID</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" name="email" id="modelEmail" required>
+                                                <input type="email" class="form-control" name="email" id="modelEmail"
+                                                    required>
                                                 <label for="floatingInputEmail">Email</label>
                                             </div>
 
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="modelNome" name="nome" required>
+                                                <input type="text" class="form-control" id="modelNome" name="nome"
+                                                    required>
                                                 <label for="floatingPassword">Primeiro nome</label>
                                             </div>
 
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="modelSobrenome" name="sobrenome" required>
+                                                <input type="text" class="form-control" id="modelSobrenome"
+                                                    name="sobrenome" required>
                                                 <label for="floatingPasswordConfirm">Sobrenome</label>
                                             </div>
 
@@ -205,7 +210,8 @@
                                                 <label for="floatingPasswordConfirm">Senha</label>
                                             </div>
 
-                                            <select class="form-select" name="role" id="modelRole" style="margin-bottom: 10px;">
+                                            <select class="form-select" name="role" id="modelRole"
+                                                style="margin-bottom: 10px;">
                                                 <option value="cliente" selected>Cliente</option>
                                                 <option value="funcionario">Funcionário</option>
                                                 <option value="admin">Administrador</option>
