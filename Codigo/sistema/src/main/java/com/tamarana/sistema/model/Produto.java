@@ -1,4 +1,7 @@
 package com.tamarana.sistema.model;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -12,6 +15,7 @@ public class Produto {
     private String descricao;
     private double preco;
     private int quantidade;
+    private String imgUrl;
 
     public Produto(String nome, String descricao, double preco, int quantidade) {
         this.nome = nome;
@@ -49,6 +53,7 @@ public class Produto {
     }
 
     public double getPreco() {
+    
         return this.preco;
     }
 
@@ -63,6 +68,15 @@ public class Produto {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+
+    public String getImgUrl() {
+        return this.imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
 
     @Override
     public String toString() {

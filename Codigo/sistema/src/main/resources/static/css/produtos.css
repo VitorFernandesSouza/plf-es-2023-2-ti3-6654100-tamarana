@@ -61,9 +61,28 @@ a span {
 }
 
 
-
 .marg {
-    margin-top: 2rem !important;
+    margin-top: 4rem !important;
 }
 
+.imgProduto {
+    width: 55% !important;
+}
 
+.botao {
+    color: white !important;
+    background-color: green !important;
+   
+}
+
+.botao:hover {
+    background-color: rgb(2, 58, 2) !important;
+}
+
+.barra {
+   
+    min-width: 75% !important;
+    max-width: 100% !important;
+    flex: none !important;
+   
+}

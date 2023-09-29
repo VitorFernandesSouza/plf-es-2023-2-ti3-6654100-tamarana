@@ -111,7 +111,8 @@
                                                                 th:data-descricao="${produto.descricao}"
                                                                 th:data-preco="${produto.preco}"
                                                                 th:data-quantidade="${produto.quantidade}"
-                                                                th:onclick="receberDados(this.getAttribute('data-id'),this.getAttribute('data-nome'),this.getAttribute('data-descricao'),this.getAttribute('data-preco'),this.getAttribute('data-quantidade'))"><i
+                                                                th:data-url="${produto.imgUrl}"
+                                                                th:onclick="receberDados(this.getAttribute('data-id'),this.getAttribute('data-nome'),this.getAttribute('data-descricao'),this.getAttribute('data-preco'),this.getAttribute('data-quantidade'),this.getAttribute('data-url'))"><i
                                                                     class="fa-solid fa-pen-to-square fa-lg"
                                                                     style="color: #f5f113;" title="Editar"></i></a>
                                                             <a href="#"
@@ -171,6 +172,11 @@
                                                         style="margin-left: 12px;">Quantidade</label>
                                                 </div>
 
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="imgUrl-produto" name="imgUrl">
+                                                    <label for="floatingInputEmail">URL da imagem</label>
+                                                </div>
+
                                             </div>
                                             <div class="text-end">
                                                 <button type="submit"
@@ -219,6 +225,12 @@
                                                 <input type="number" class="form-control" name="quantidade"
                                                     id="modelQuantidade" required>
                                                 <label>Quantidade</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" name="imgUrl"
+                                                    id="modelUrl" required>
+                                                <label>URL da imagem</label>
                                             </div>
                                             <div class="text-end">
                                                 <button class="btn btn-md btn-primary btn-login"
