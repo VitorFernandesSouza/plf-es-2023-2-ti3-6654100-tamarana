@@ -22,7 +22,6 @@ import com.tamarana.sistema.services.CookieService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 @Controller
 public class AdminController {
 
@@ -36,7 +35,7 @@ public class AdminController {
     private AnimalRep repAnimal;
 
     @GetMapping("/admin")
-    public String index(Model model,HttpServletRequest request) {
+    public String index(Model model, HttpServletRequest request) {
         String roleAdmin = CookieService.getCookie(request, "role");
         if (roleAdmin != null && roleAdmin.equals("admin")) {
             return "redirect:/admin/gerenciarUsuarios";
@@ -45,24 +44,23 @@ public class AdminController {
 
     }
 
-
     // LOGIN
     @PostMapping("/adminLogar")
     public String logar(Model model, Usuario usuarioParam, HttpServletResponse response) {
         Usuario admin = this.repUsuario.Login(usuarioParam.getEmail(), usuarioParam.getSenha());
         if (admin != null) {
             if (admin.getRole().equals("admin")) {
-                int tempoLogado = 60*60;
+                int tempoLogado = 60 * 60;
                 CookieService.setCookie(response, "id", String.valueOf(admin.getId()), tempoLogado);
                 CookieService.setCookie(response, "emailUsuario", admin.getEmail(), tempoLogado);
                 CookieService.setCookie(response, "nomeUsuario", admin.getNome(), tempoLogado);
                 CookieService.setCookie(response, "sobrenomeUsuario", admin.getSobrenome(), tempoLogado);
                 CookieService.setCookie(response, "role", admin.getRole(), tempoLogado);
                 return "redirect:/admin/gerenciarUsuarios";
-            }  
+            }
         }
         model.addAttribute("erro", "Credenciais incorretas");
-        
+
         return "admin/login";
     }
 
@@ -76,15 +74,14 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-
-   // GERENCIAR USUÁRIOS
+    // GERENCIAR USUÁRIOS
     @GetMapping("/admin/gerenciarUsuarios")
     public String gerenciarUsuarios(Model model, HttpServletRequest request) {
-        String roleAdmin = CookieService.getCookie(request, "role");    
+        String roleAdmin = CookieService.getCookie(request, "role");
         String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
-        if (roleAdmin.equals("admin")){
-            List<Usuario> listaUsuarios = (List<Usuario>)repUsuario.findAll();
-            model.addAttribute("listaUsuarios", listaUsuarios);        
+        if (roleAdmin.equals("admin")) {
+            List<Usuario> listaUsuarios = (List<Usuario>) repUsuario.findAll();
+            model.addAttribute("listaUsuarios", listaUsuarios);
             model.addAttribute("roleAdmin", roleAdmin);
             model.addAttribute("nomeAdmin", nomeAdmin);
             return "admin/gerenciarUsuarios";
@@ -101,7 +98,7 @@ public class AdminController {
             model.addAttribute("erro", "Erro ao cadastrar, volte para a página anterior e tente novamente");
             e.printStackTrace();
             return "admin/gerenciarUsuarios";
-        } 
+        }
         return "redirect:/admin/gerenciarUsuarios";
     }
 
@@ -112,15 +109,15 @@ public class AdminController {
             repUsuario.deleteById(id);
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
-        } 
+        }
         return "redirect:/admin/gerenciarUsuarios";
     }
 
     // EDITAR USUÁRIO
     @PostMapping("/admin/editarUsuario")
     public String eiditarUsuario(Model model, Usuario usuarioParam) {
-        try { 
-            Usuario usuario = repUsuario.getReferenceById(usuarioParam.getId());  
+        try {
+            Usuario usuario = repUsuario.getReferenceById(usuarioParam.getId());
             if (usuario != null) {
                 if (usuarioParam.getSenha().length() == 0) {
                     usuarioParam.setSenha(usuario.getSenha());
@@ -131,18 +128,17 @@ public class AdminController {
             model.addAttribute("erro", "Erro ao editar, volte para a página anterior e tente novamente");
             e.printStackTrace();
             return "admin/gerenciarUsuarios";
-        } 
+        }
         return "redirect:/admin/gerenciarUsuarios";
     }
 
-    
     // GERENCIAR PRODUTOS
     @GetMapping("/admin/gerenciarProdutos")
     public String gerenciarProdutos(Model model, HttpServletRequest request) {
         String roleAdmin = CookieService.getCookie(request, "role");
         String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
-        if (roleAdmin.equals("admin")){
-            List<Produto> listaProdutos = (List<Produto>)repProduto.findAll();
+        if (roleAdmin.equals("admin")) {
+            List<Produto> listaProdutos = (List<Produto>) repProduto.findAll();
             model.addAttribute("listaProdutos", listaProdutos);
             model.addAttribute("roleAdmin", roleAdmin);
             model.addAttribute("nomeAdmin", nomeAdmin);
@@ -160,7 +156,7 @@ public class AdminController {
             model.addAttribute("erro", "Erro ao cadastrar, volte para a página anterior e tente novamente");
             e.printStackTrace();
             return "admin/gerenciarProdutos";
-        } 
+        }
         return "redirect:/admin/gerenciarProdutos";
     }
 
@@ -171,15 +167,15 @@ public class AdminController {
             repProduto.deleteById(id);
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
-        } 
-        return "redirect:/admin/gerenciarProdutos"; 
+        }
+        return "redirect:/admin/gerenciarProdutos";
     }
 
     // EDITAR PRODUTO
     @PostMapping("/admin/editarProduto")
     public String eiditarProduto(Model model, Produto produtoParam) {
-        try { 
-            Produto produto = repProduto.getReferenceById(produtoParam.getId());  
+        try {
+            Produto produto = repProduto.getReferenceById(produtoParam.getId());
             if (produto != null) {
                 repProduto.save(produtoParam);
             }
@@ -187,7 +183,7 @@ public class AdminController {
             model.addAttribute("erro", "Erro ao editar, volte para a página anterior e tente novamente");
             e.printStackTrace();
             return "admin/gerenciarProdutos";
-        } 
+        }
         return "redirect:/admin/gerenciarProdutos";
     }
 
@@ -196,8 +192,8 @@ public class AdminController {
     public String gerenciarAnimais(Model model, HttpServletRequest request) {
         String roleAdmin = CookieService.getCookie(request, "role");
         String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
-        if (roleAdmin.equals("admin")){
-            List<Animal> listaAnimais = (List<Animal>)repAnimal.findAll();
+        if (roleAdmin.equals("admin")) {
+            List<Animal> listaAnimais = (List<Animal>) repAnimal.findAll();
             model.addAttribute("listaAnimais", listaAnimais);
             model.addAttribute("roleAdmin", roleAdmin);
             model.addAttribute("nomeAdmin", nomeAdmin);
@@ -215,7 +211,7 @@ public class AdminController {
             model.addAttribute("erro", "Erro ao cadastrar, volte para a página anterior e tente novamente");
             e.printStackTrace();
             return "admin/gerenciarAnimais";
-        } 
+        }
         return "redirect:/admin/gerenciarAnimais";
     }
 
@@ -226,15 +222,15 @@ public class AdminController {
             repAnimal.deleteById(id);
         } catch (NonTransientDataAccessException e) {
             e.printStackTrace();
-        } 
-        return "redirect:/admin/gerenciarAnimais"; 
+        }
+        return "redirect:/admin/gerenciarAnimais";
     }
 
     // EDITAR ANIMAL
     @PostMapping("/admin/editarAnimal")
     public String eiditarAnimal(Model model, Animal animalParam) {
-        try { 
-            Animal animal = repAnimal.getReferenceById(animalParam.getId());  
+        try {
+            Animal animal = repAnimal.getReferenceById(animalParam.getId());
             System.out.println(animalParam);
             if (animal != null) {
                 repAnimal.save(animalParam);
@@ -243,9 +239,8 @@ public class AdminController {
             model.addAttribute("erro", "Erro ao editar, volte para a página anterior e tente novamente");
             e.printStackTrace();
             return "admin/gerenciarAnimais";
-        } 
+        }
         return "redirect:/admin/gerenciarAnimais";
     }
-
 
 }
