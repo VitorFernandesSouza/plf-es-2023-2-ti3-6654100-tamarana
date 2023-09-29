@@ -32,7 +32,8 @@
         <div class="collapse navbar-collapse " id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto controle">
                 <li class="nav-item espacamentoitens efeito">
-                    <a class="nav-link nav-links" aria-current="page" href="#">Produtos</a>
+                    <a th:if="${logado == true}" class="nav-link nav-links" aria-current="page" href="perfil/produtos">Produtos</a>
+                    <a th:if="${logado != true}" class="nav-link nav-links" aria-current="page" href="login">Produtos</a>
                 </li>
                 <li class="nav-item espacamentoitens efeito">
                     <a class="nav-link nav-links" href="#">Contato</a>
