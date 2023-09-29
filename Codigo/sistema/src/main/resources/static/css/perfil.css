@@ -8,11 +8,11 @@
 }
 
 body {
-    background: #ffffff !important;
+    background: #f2f2f2 !important;
     font-family: 'Open Sans', sans-serif;
     line-height: 54px;
     font-size: 16px;
-    color: rgb(255, 0, 0);
+    color: white;
 }
 
 body::before {
@@ -27,7 +27,6 @@ body::before {
 
 
 /*  ------------------ CSS NAV BAR -------------------- */
-
 .menu .logo a {
     text-decoration: none;
     color: green;
@@ -60,12 +59,11 @@ body::before {
 }
 
 .container {
-    max-width: 700px;
+    max-width: 950px;
     width: 100%;
     overflow: hidden;
-    padding-bottom: 70px; /* Ajuste o valor conforme necessário para reduzir o espaço */
+    padding: 80px 0;
 }
-
 
 .container .main-card {
     display: flex;
@@ -77,11 +75,6 @@ body::before {
 /* #two:checked~.main-card */
 .main-card {
     margin-left: -50%;
-    margin-bottom: -20px !important;
-}
-.main-card .cards {
-    max-width: 100%; /* Garante que os cards não ultrapassem a largura do body */
-    margin: 0 auto; /* Mantém os cards centralizados na página */
 }
 
 .container .main-card .cards {
@@ -93,11 +86,10 @@ body::before {
 }
 
 .main-card .cards .card {
-    margin: 0 10px;
-    width: calc(100% / 3 - 20px);
+    width: calc(100% / 3 - 10px);
     background: #fff;
     border-radius: 12px;
-    padding: 20px;
+    padding: 30px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.4s ease;
 }
@@ -160,7 +152,7 @@ a span {
     width: 35px;
     margin: 0 4px;
     font-size: 14px;
-    color: #fff;
+    color: #FFF;
     border-radius: 50%;
     border: 2px solid transparent;
     background: green;
@@ -263,13 +255,9 @@ input[type="radio"] {
 
 #boasvindas {
     font-weight: 600;
-    font-size: 25px;
+    font-size: 35px;
     color: #232323;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: none; /* Remove qualquer borda */
 }
-
 
 #primeiro {
     margin: 0;

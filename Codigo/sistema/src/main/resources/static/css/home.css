@@ -71,9 +71,6 @@ body {
   background: green;
   color: rgb(255, 255, 255) !important;
 }
-.hamburguer-button .fa-bars {
-  color: green; /*mudar a cor do icon do hamburguer */
-}
 
 /* ------------------------ CONTEUDO ------------------------------------------ */
 
