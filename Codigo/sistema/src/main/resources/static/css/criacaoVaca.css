@@ -12,8 +12,7 @@
     line-height: 54px;
     font-size: 16px;
     color: white;
-    
-
+  
   }
 
   ::selection {
@@ -52,10 +51,11 @@
   }
 
   .about-us{
-    height: 100vh;
+    height: 170vh;
     width: 100%;
     padding: 90px 0;
     background: linear-gradient(to right, #006400, #008000);
+  
   }
   .pic {
     border-radius: 20px;
