@@ -1,0 +1,136 @@
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    overflow-x: hidden;
+    line-height: 54px;
+    font-size: 16px;
+    color: white;
+    
+
+  }
+
+  ::selection {
+    color: green;
+    background: #fff;
+  }
+
+  /*  ------------------ CSS NAV BAR -------------------- */
+  .menu .logo a {
+    text-decoration: none;
+    color: green;
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  .item {
+    text-decoration: none !important;
+    color: green !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    padding: 8px 15px !important;
+    border-radius: 5px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .efeito a:hover {
+    background: rgb(13, 189, 13);
+    color: rgb(255, 255, 255) !important;
+  }
+
+  /* ------------------------------------------------------------------------------------------------------------ */
+  @media (min-width: 768px) {
+    body {
+      overflow: hidden; /*bloquear scroll*/
+    }
+  }
+
+  .about-us{
+    height: 100vh;
+    width: 100%;
+    padding: 90px 0;
+    background: linear-gradient(to right, #006400, #008000);
+  }
+  .pic {
+    border-radius: 20px;
+    width: 100%;
+    max-width: 302px;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  .about {
+    color: whitesmoke;
+    max-width: 90%;
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .text{
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    .about {
+      grid-template-columns: 1fr; /* Altere o layout para uma coluna em telas menores */
+    }
+  
+    .text {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .text h2 {
+      font-size: 60px; /* Ajuste o tamanho da fonte para telas menores */
+    }
+  }
+  
+  .text h2{
+    font-size: 90px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .text h5{
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  span1{
+    color: #D2B48C;
+  }
+  .text p{
+ 
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 1px;
+  }
+  .data{
+    
+    margin-top: 30px;
+  }
+  .hire{
+    font-weight: bold;
+    font-size: 18px;
+    background: #fff;
+    color: green;
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 8px 25px;
+    border-radius: 6px;
+    transition: 0.5s;
+  }
+  .hire:hover{
+    font-weight: bolder;
+    color: #fff;
+    background: green;
+    border: 1px solid #fff;
+  }
