@@ -9,7 +9,7 @@
 - Gerenciamento de usuários
 - Gerenciamento de produtos
 - Gerenciamento de animais
-- 
+- Visualização de produtos
 
 ## 👥 Alunos integrantes da equipe
 
