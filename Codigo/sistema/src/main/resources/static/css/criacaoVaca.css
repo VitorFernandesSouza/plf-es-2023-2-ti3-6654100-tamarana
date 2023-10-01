@@ -39,7 +39,7 @@
   }
 
   .efeito a:hover {
-    background: rgb(13, 189, 13);
+    background: green;
     color: rgb(255, 255, 255) !important;
   }
 
