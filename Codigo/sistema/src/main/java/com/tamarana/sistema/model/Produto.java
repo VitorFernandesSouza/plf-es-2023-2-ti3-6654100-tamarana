@@ -1,6 +1,4 @@
 package com.tamarana.sistema.model;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
