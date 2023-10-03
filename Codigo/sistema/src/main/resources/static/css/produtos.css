@@ -71,12 +71,11 @@ a span {
 
 .botao {
     color: white !important;
-    background-color: green !important;
-   
+    background-color: rgb(2, 58, 2) !important;
 }
 
 .botao:hover {
-    background-color: rgb(2, 58, 2) !important;
+    background-color: green !important;
 }
 
 .barra {
@@ -87,4 +86,7 @@ a span {
 
 .esconder {
     display: none !important;
+}
+.text-danger .fa-star {
+    color: gold;
 }

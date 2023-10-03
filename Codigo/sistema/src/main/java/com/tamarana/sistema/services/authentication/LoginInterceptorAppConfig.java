@@ -25,7 +25,8 @@ public class LoginInterceptorAppConfig implements WebMvcConfigurer  {
                 "/",
                 "/home",
                 "/perfil",
-                "/criacaoVaca"
+                "/criacaoVaca",
+                "/contato"
                 
             );
     }
