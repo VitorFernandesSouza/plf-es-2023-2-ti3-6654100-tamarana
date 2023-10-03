@@ -16,8 +16,8 @@ body {
 }
 
 ::selection {
-  color: #000;
-  background: #fff;
+  color: #fff;
+  background: black;
 }
 
 /* ------------------------ NAV BAR ------------------------------------------ */
