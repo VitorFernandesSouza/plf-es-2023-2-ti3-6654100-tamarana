@@ -3,6 +3,7 @@ package com.tamarana.sistema.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
     
 @Table(name="produto")
 @Entity(name="produto")
