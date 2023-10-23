@@ -34,6 +34,7 @@
             <li th:if="${logado != true}"><a class="dropdown-item" href="cadastro">Criar conta</a></li>
             <li th:if="${logado != true}"><a class="dropdown-item" href="login">Fazer login</a></li>
             <li th:if="${logado == true}"><a class="dropdown-item" href="/perfil">Meu perfil</a></li>
+            <li th:if="${logado == true}"><a class="dropdown-item" href="/perfil/carrinho">Carrinho</a></li>
             <li><a class="dropdown-item" href="#">Dúvidas frequentes</a></li>
             <li th:if="${logado == true}"><a class="dropdown-item" href="/sair">Sair</a></li>
           </ul>

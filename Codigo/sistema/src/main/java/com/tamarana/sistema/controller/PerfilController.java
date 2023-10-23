@@ -11,11 +11,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class PerfilController {
 
     @GetMapping("/perfil")
-    public String perfil(Model model,HttpServletRequest request) {
+    public String perfil(Model model, HttpServletRequest request) {
         String nomeUsuario = CookieService.getCookie(request, "nomeUsuario");
         if (nomeUsuario != null) {
             model.addAttribute("logado", true);
-             model.addAttribute("nomeUsuario", nomeUsuario);
+            model.addAttribute("nomeUsuario", nomeUsuario);
             return "perfil/perfil";
         }
         return "redirect:/login";

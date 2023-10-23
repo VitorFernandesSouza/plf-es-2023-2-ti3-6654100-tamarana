@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse " id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto controle">
                 <li class="nav-item espacamentoitens efeito">
-                    <a th:if="${logado == true}" class="nav-link nav-links" aria-current="page" href="perfil/produtos">Produtos</a>
+                    <a th:if="${logado == true}" class="nav-link nav-links" aria-current="page" href="produtos">Produtos</a>
                     <a th:if="${logado != true}" class="nav-link nav-links" aria-current="page" href="login">Produtos</a>
                 </li>
                 <li class="nav-item espacamentoitens efeito">
@@ -53,6 +53,7 @@
                       <li th:if="${logado != true}"><a class="dropdown-item" href="cadastro">Criar conta</a></li>
                       <li th:if="${logado != true}"><a class="dropdown-item" href="login">Fazer login</a></li>
                       <li th:if="${logado == true}"><a class="dropdown-item" href="/perfil">Meu perfil</a></li>
+                      <li th:if="${logado == true}"><a class="dropdown-item" href="/perfil/carrinho">Carrinho</a></li>
                       <li><a class="dropdown-item" href="#">Dúvidas frequentes</a></li>
                       <li th:if="${logado == true}"><a class="dropdown-item" href="/sair" onclick="return confirm('Deseja realmente sair?')">Sair</a></li>
                     </ul>
