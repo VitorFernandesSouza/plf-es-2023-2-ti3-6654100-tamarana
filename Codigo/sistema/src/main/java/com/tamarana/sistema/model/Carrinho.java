@@ -1,12 +1,15 @@
 package com.tamarana.sistema.model;
 
+
 import com.tamarana.sistema.model.usuario.Usuario;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Table(name="carrinho")
 @Entity(name="carrinho")
@@ -24,14 +27,18 @@ public class Carrinho {
 
     private int quantidade;
 
+    @Nonnull
+    private int confirmada;
 
     public Carrinho() {
+        this.confirmada = 0;
     }
 
     public Carrinho(Produto produto, Usuario usuario, int quantidade) {
         this.produto = produto;
         this.usuario = usuario;
         this.quantidade = quantidade;
+        this.confirmada = 0;
     }
 
     public int getId() {
@@ -84,6 +91,21 @@ public class Carrinho {
     public Carrinho quantidade(int quantidade) {
         setQuantidade(quantidade);
         return this;
+    }
+
+
+    public int getConfirmada() {
+        return this.confirmada;
+    }
+
+    public void setConfirmada(int confirmada) {
+        this.confirmada = confirmada;
+    }
+  
+
+    @Transient
+    public double getSubtotal() {
+        return this.produto.getPreco()*quantidade;
     }
 
 

@@ -9,7 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/carrinho.js}"></script>
+    <script src="https://kit.fontawesome.com/4269015da9.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -67,10 +69,11 @@
             <div class="row">
                 <h3 class="text-center">Confira seu carrinho de compras abaixo</h3>
             </div>
+            <div th:if="${pedidoRealizado != null}" th:text="${pedidoRealizado}" class="alert alert-success" role="alert"></div>
         </div>
 
-        <div class="container py-1" th:unless="${#lists.isEmpty(carrinho)}">
-            <div class="row mb-3">
+        <div class="container py-1" th:unless="${vendaPendente == false}">
+            <div class="row mb-3" >
                 <div class="input-group rounded justify-content-center">
                     <input type="search" class="form-control barra rounded" placeholder="Pesquisar" aria-label="Search"
                         aria-describedby="search-addon" data-search>
@@ -83,9 +86,9 @@
     </section>
 
     <section style="background-color: #f2f2f2;">
-        <div class="container py-5" data-produto-container th:unless="${#lists.isEmpty(carrinho)}">
-            <div class="row justify-content-center mb-3 sel" th:each="item : ${carrinho}">
-                <div class="col-md-12 col-xl-10" th:with="produto = ${item.produto}">
+        <div class="container py-5" data-produto-container th:unless="${vendaPendente == false}">
+            <div class="row justify-content-center mb-3 sel" th:each="item : ${carrinho}" >
+                <div class="col-md-12 col-xl-10" th:with="produto = ${item.produto}" th:if="${item.confirmada == 0}">
                     <div class="card shadow-0 border rounded-3">
                         <div class="card-body" style="background-color: white" data-card-produto>
                             <div class="row">
@@ -137,14 +140,23 @@
                                     <h6 class="text-success">30% de desconto!</h6>
                                     <div class="marg row">
                                         <div class="d-flex d-flex flex-column col-4">
-                                            <input type="number" th:value="${item.quantidade}"
-                                                style="padding-left: 5px;">
+                                            <input type="number" id="quant" th:value="${item.quantidade}" 
+                                            style="padding-left: 5px; "  
+                                            readonly > 
                                         </div>
                                         <div class="col-8">
                                             <p style="color: rgb(78, 131, 78);">em estoque: <span
                                                     th:text="${produto.quantidade}"></span></p>
+                                                  
+                                                    
                                         </div>
+                                        <p>Subtotal: R$<span class="subtotal" th:text="${item.subtotal}"></span></p>
                                     </div>
+                                    <a href="#" 
+                                            th:produto-id="${produto.id}"
+                                            th:onclick="'if(confirm(\'Remover produto?\')) {window.location.href = \'' + @{/perfil/carrinho/remover/{id}(id=${produto.id})} + '\'}'"><i
+                                                class="fa-solid fa-trash fa-lg d-flex justify-content-end"
+                                                style="color: #f00000;" title="Remover"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -153,26 +165,75 @@
             </div>
             <div class="row">
                 <hr>
-                <p style="padding-left: 8rem;">Total da compra: <span id="valorTotal"></span></p>
+                <h4 style="padding-left: 8rem;">Total da compra: R$ <span id="valorTotal"></span></h4>
+              
             </div>
             <div class="row">
                 <div class="d-grid gap-2 d-md-flex justify-content-center">
-                    <button class="btn btn-primary btn-lg">Finalizar compra</button>
+                    <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#finalizarCompra"
+                    onclick="receberDadosFinalizar()"
+                    >Finalizar compra</button>
                 </div>
 
-            </div>
+            </div>  
         </div>
-        <div th:if="${#lists.isEmpty(carrinho)}">
-            <div class="container">
+        <div th:if="${vendaPendente == false}">
+            <div class="container" >
                 <div class="row">
                     <h3 class="text-center">Seu carrinho está vazio!</h3>
-                    <a class="text-center" href="../produtos">confira nossos produtos</a>
+                    <a th:unless="${pedidoRealizado != null}" class="text-center" href="../produtos">confira nossos produtos</a>
+                    <a th:if="${pedidoRealizado != null}" class="text-center" href="../../produtos">confira nossos produtos</a>
                 </div>
             </div>
 
         </div>
 
+        <div class="modal fade" id="finalizarCompra" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Criar pedido de compra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/perfil/carrinho/criar-pedido">
+                        <div class="form-floating mb-3" th:each="item : ${carrinho}" th:with="produto = ${item.produto}">
+                            <div class="row">
+                                <div class="col-8 "  >
+                                    <input type="text" class="form-control" th:value="${produto.nome}"
+                                    required readonly>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" class="form-control" th:value="${item.quantidade}"
+                                    required readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3"> 
+                            <input type="number" id="preco-total" name="valor" class="form-control" 
+                            required readonly>
+                            <label for="">Preço total</label>
+                        </div>          
+                        <div class="text-end">
+                            <input type="number" name="usuario" th:value="${idUsuario}" id="preco-total" class="form-control" 
+                            required readonly style="display: none;">
+                            <button type="submit"
+                                class="btn btn-md btn-primary btn-login">Criar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     </section>
+
+   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>

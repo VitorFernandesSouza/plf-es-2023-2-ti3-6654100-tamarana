@@ -138,21 +138,30 @@
                   <div class="row">
                     <p style="color: rgb(78, 131, 78);">Quantidade em estoque: <span th:text="${produto.quantidade}"></span></p>
                   </div>
-                  <div class="marg row">
-                    <!-- <p th:text="${produto.id}"></p> -->
-                    <!-- <form method="POST" action="/perfil/carrinho/adicionar/{id}(id=${produto.id})/2"> -->
-                  
-                    
-                    <form id="formulario" method="POST" th:action="@{/perfil/carrinho/adicionar/{id} (id=${produto.id})}">
-                      <div class="col-8">
-                        <div class="d-grid">
-                            <button class="btn botao btn-sm" type="submit" id="adicionarAoCarrinho" onclick="alert('item adicionado ao carrinho')">Adicionar</button>
-                        </div>  
+             
+                  <div class="marg row">       
+                    <form id="formulario" method="POST" th:action="@{/perfil/carrinho/adicionar/{id} (id=${produto.id})}" > 
+                      <input id="inputIdProd" style="margin: 0; display: none;" name="produto">
+                      <input id="inputIdUsuario" style="margin: 0; display: none;" name="usuario">
+                      <div class="row">
+                        <div class=" d-flex d-flex flex-column col-4 ">
+                          <input type="number" value="1" style="padding-left: 5px;" name="quantidade" min="1" th:max="${produto.quantidade}"> 
+                        </div>
+                        <div class="col-8">
+                          <div class="d-grid">
+                              <button class="btn botao btn-sm" type="submit" id="adicionarAoCarrinho"
+                              th:data-id="${produto.id}"
+                              th:data-usuario="${idUsuario}"
+  
+                              onclick="alert('item adicionado ao carrinho'), receberDados(this.getAttribute('data-id'),this.getAttribute('data-usuario'))">Adicionar</button>
+                          </div>  
+                        </div>
                       </div>
+                     
                     </form>      
                 </div>
               </div>
-            </div>
+            </div> 
           </div>
         </div>
       </div>

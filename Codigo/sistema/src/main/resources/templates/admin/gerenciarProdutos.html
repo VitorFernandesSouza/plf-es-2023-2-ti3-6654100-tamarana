@@ -115,7 +115,7 @@
                                                                 th:onclick="receberDados(this.getAttribute('data-id'),this.getAttribute('data-nome'),this.getAttribute('data-descricao'),this.getAttribute('data-preco'),this.getAttribute('data-quantidade'),this.getAttribute('data-url'))"><i
                                                                     class="fa-solid fa-pen-to-square fa-lg"
                                                                     style="color: #f5f113;" title="Editar"></i></a>
-                                                            <a href="#"
+                                                            <a href="#" 
                                                                 th:onclick="'if(confirm(\'Remover produto?\')) {window.location.href = \'' + @{/admin/{id}(id=${produto.id})} + '/removerProduto\'}'"><i
                                                                     class="fa-solid fa-trash fa-lg"
                                                                     style="color: #f00000;" title="Remover"></i></a>

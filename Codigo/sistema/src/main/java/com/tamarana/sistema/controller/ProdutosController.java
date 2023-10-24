@@ -20,9 +20,11 @@ public class ProdutosController {
     @GetMapping("/produtos")
     public String produtos(Model model,HttpServletRequest request) {
         String nomeUsuario = CookieService.getCookie(request, "nomeUsuario");
+        int idUsuario = Integer.parseInt(CookieService.getCookie(request, "id"));
         if (nomeUsuario != null) {
             model.addAttribute("logado", true);
             model.addAttribute("nomeUsuario", nomeUsuario);
+            model.addAttribute("idUsuario", idUsuario);
             List<Produto> listaProdutos = (List<Produto>) repProduto.findAll();
             model.addAttribute("listaProdutos", listaProdutos);
 
