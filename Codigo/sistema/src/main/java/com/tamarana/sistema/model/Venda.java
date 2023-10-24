@@ -96,38 +96,6 @@ public class Venda {
         return this;
     }
 
-   
-
-    // public String addProduto(Produto produto) {
-    //     listaProdutos.add(produto);
-    //     return produto.getNome();  
-    // }
-
-    // public String todosProdutos() {
-    //     String result = "";
-    //     for (int i=0; i<listaProdutos.size(); i++) {
-    //         result += listaProdutos.get(i).getNome() + " " + "quantidade " + listaCarrinho.get(i).getQuantidade() + " ";
-    //     }
-    //     return result;
-    // }
-
-    // public int addCarrinho (Carrinho carrinho) {
-    //     listaCarrinho.add(carrinho);
-    //     return carrinho.getQuantidade();
-    // }
-
-    //    public String quantidadeProduto() {
-    //     String result = "";
-    //     for (Carrinho item : listaCarrinho) {
-    //         result += item.getQuantidade() + " " ;
-    //     }
-    //     return result;
-    // }
-
-
-
-    
-
     @Override
     public String toString() {
         return "{" +
