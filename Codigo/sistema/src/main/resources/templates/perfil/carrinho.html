@@ -197,10 +197,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" ON>
                     <form method="POST" action="/perfil/carrinho/criar-pedido">
                         <div class="form-floating mb-3" th:each="item : ${carrinho}" th:with="produto = ${item.produto}">
-                            <div class="row">
+                            <div class="row" th:if="${item.confirmada == 0}">
                                 <div class="col-8 "  >
                                     <input type="text" class="form-control" th:value="${produto.nome}"
                                     required readonly>
@@ -208,13 +208,17 @@
                                 <div class="col-4">
                                     <input type="number" class="form-control" th:value="${item.quantidade}"
                                     required readonly>
+                                    <input type="textarea" class="form-control"  th:value="${produto.nome} + ' ' + ${item.quantidade}" name="descricao" style="display: none;">
                                 </div>
                             </div>
+                            
                         </div>
                         <div class="form-floating mb-3"> 
+                         
                             <input type="number" id="preco-total" name="valor" class="form-control" 
                             required readonly>
                             <label for="">Preço total</label>
+                            <!-- <input type="textarea" class="form-control" th:each="venda : ${vendas}" th:value="${venda.todosProdutos()}" name="descricao"> -->
                         </div>          
                         <div class="text-end">
                             <input type="number" name="usuario" th:value="${idUsuario}" id="preco-total" class="form-control" 

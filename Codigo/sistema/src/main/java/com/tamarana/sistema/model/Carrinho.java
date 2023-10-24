@@ -30,6 +30,8 @@ public class Carrinho {
     @Nonnull
     private int confirmada;
 
+ 
+
     public Carrinho() {
         this.confirmada = 0;
     }
@@ -39,6 +41,7 @@ public class Carrinho {
         this.usuario = usuario;
         this.quantidade = quantidade;
         this.confirmada = 0;
+   
     }
 
     public int getId() {
@@ -107,6 +110,8 @@ public class Carrinho {
     public double getSubtotal() {
         return this.produto.getPreco()*quantidade;
     }
+
+
 
 
     @Override

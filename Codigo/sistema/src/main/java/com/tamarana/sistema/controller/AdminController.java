@@ -2,6 +2,7 @@
 package com.tamarana.sistema.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.NonTransientDataAccessException;
@@ -12,11 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tamarana.sistema.model.Animal;
+
 import com.tamarana.sistema.model.Produto;
+import com.tamarana.sistema.model.Venda;
 import com.tamarana.sistema.model.usuario.Usuario;
 import com.tamarana.sistema.repositories.AnimalRep;
+
 import com.tamarana.sistema.repositories.ProdutoRep;
 import com.tamarana.sistema.repositories.UserRepository;
+import com.tamarana.sistema.repositories.VendaRep;
 import com.tamarana.sistema.services.CookieService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +38,9 @@ public class AdminController {
 
     @Autowired
     private AnimalRep repAnimal;
+
+    @Autowired
+    private VendaRep repVenda;
 
     @GetMapping("/admin")
     public String index(Model model, HttpServletRequest request) {
@@ -241,6 +249,51 @@ public class AdminController {
             return "admin/gerenciarAnimais";
         }
         return "redirect:/admin/gerenciarAnimais";
+    }
+
+     // GERENCIAR PEDIDOS
+    @GetMapping("/admin/gerenciarPedidos")
+    public String gerenciarPedidos(Model model, HttpServletRequest request) {
+        String roleAdmin = CookieService.getCookie(request, "role");
+        String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
+        if (roleAdmin.equals("admin")) {
+            List<Venda> listaVendas = (List<Venda>) repVenda.findAll();
+            model.addAttribute("listaVendas", listaVendas);
+          
+       
+            model.addAttribute("roleAdmin", roleAdmin);
+            model.addAttribute("nomeAdmin", nomeAdmin);
+            return "admin/gerenciarPedidos";
+        }
+        return "admin/login";
+    }
+
+    // CONFIRMAR PEDIDO
+    @GetMapping("/admin/{id}/confirmar")
+    public String confirmarPedido(@PathVariable int id) {
+        System.out.println(id);
+        try {
+           Venda venda =  repVenda.findById(id).get();
+           venda.setStatus("confirmada");
+           repVenda.save(venda);
+        
+        } catch (Exception e) {
+           
+            e.printStackTrace();
+            return "redirect:/admin/gerenciarPedidos";
+        }
+        return "redirect:/admin/gerenciarPedidos";
+    }
+
+     // REMOVER PEDIDO
+    @GetMapping("/admin/{id}/removerPedido")
+    public String removerPedido(@PathVariable int id) {
+        try {
+            repVenda.deleteById(id);
+        } catch (NonTransientDataAccessException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/admin/gerenciarPedidos";
     }
 
 }

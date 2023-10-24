@@ -1,5 +1,6 @@
 package com.tamarana.sistema.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,12 @@ public class CarrinhoController {
             String emailUsuario = CookieService.getCookie(request, "emailUsuario");
             Usuario usuario = usuarioRep.findByEmail(emailUsuario);
             List<Carrinho> carrinho = carrinhoService.listarCarrinho(usuario);
+            List<Venda> vendas = vendaRep.findAll();
         
             model.addAttribute("nomeUsuario", nomeUsuario);
             model.addAttribute("idUsuario", idUsuario);
             model.addAttribute("carrinho", carrinho);
+             model.addAttribute("vendas", vendas);
 
             boolean vendaPendente = false;
             for(Carrinho item : carrinho) {
@@ -96,6 +99,8 @@ public class CarrinhoController {
             Usuario usuario = usuarioRep.findByEmail(emailUsuario);
             int quantidade = carrinho.getQuantidade();
             carrinhoService.adicionarProduto(idProduto, usuario, quantidade);
+            Venda venda = new Venda(usuario);
+            vendaRep.save(venda);
             System.out.println("item adicionado ao seu carrinho!");
          
             return "redirect:/produtos";
@@ -129,10 +134,11 @@ public class CarrinhoController {
                 carrinhoRep.save(item);
             }
             
-           model.addAttribute("vendaPendente", false);
-           model.addAttribute("logado", true);
-           model.addAttribute("pedidoRealizado", "Seu pedido de compra foi criado com sucesso! Aguarde a confirmação por um funcionário");
-            return "perfil/carrinho";
+            model.addAttribute("vendaPendente", false);
+            model.addAttribute("logado", true);
+            model.addAttribute("pedidoRealizado", "Seu pedido de compra foi criado com sucesso! Aguarde a confirmação por um funcionário");
+
+        return "perfil/carrinho";
         }
 
         return "redirect:/login";

@@ -1,4 +1,7 @@
 package com.tamarana.sistema.model;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tamarana.sistema.model.usuario.Usuario;
 
 import jakarta.persistence.Entity;
@@ -18,15 +21,22 @@ public class Venda {
     private Usuario usuario;
 
     private double valor;
+    private String descricao;
+    private String status;
 
 
     public Venda() {
+       this.status = "pendente";
     }
 
-    public Venda(int id, Usuario usuario, double valor) {
-        this.id = id;
+    public Venda(Usuario usuario, double valor, List<Produto> listaProdutos) {
         this.usuario = usuario;
         this.valor = valor;
+        
+    }
+
+    public Venda(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public int getId() {
@@ -53,6 +63,24 @@ public class Venda {
         this.valor = valor;
     }
 
+    public String getDescricao() {
+        return this.descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
     public Venda id(int id) {
         setId(id);
         return this;
@@ -68,6 +96,38 @@ public class Venda {
         return this;
     }
 
+   
+
+    // public String addProduto(Produto produto) {
+    //     listaProdutos.add(produto);
+    //     return produto.getNome();  
+    // }
+
+    // public String todosProdutos() {
+    //     String result = "";
+    //     for (int i=0; i<listaProdutos.size(); i++) {
+    //         result += listaProdutos.get(i).getNome() + " " + "quantidade " + listaCarrinho.get(i).getQuantidade() + " ";
+    //     }
+    //     return result;
+    // }
+
+    // public int addCarrinho (Carrinho carrinho) {
+    //     listaCarrinho.add(carrinho);
+    //     return carrinho.getQuantidade();
+    // }
+
+    //    public String quantidadeProduto() {
+    //     String result = "";
+    //     for (Carrinho item : listaCarrinho) {
+    //         result += item.getQuantidade() + " " ;
+    //     }
+    //     return result;
+    // }
+
+
+
+    
+
     @Override
     public String toString() {
         return "{" +
@@ -76,6 +136,6 @@ public class Venda {
             ", valor='" + getValor() + "'" +
             "}";
     }
-    
+
 
 }
