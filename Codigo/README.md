@@ -3,6 +3,7 @@
 O projeto foi desenvolvido com as seguintes tecnologias:
 - HTML5
 - CSS3
+- Javascript
 - Bootstrap 5
 - JQuery
 - Thymeleaf

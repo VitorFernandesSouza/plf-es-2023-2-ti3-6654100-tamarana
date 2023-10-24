@@ -10,6 +10,7 @@
 - Gerenciamento de produtos
 - Gerenciamento de animais
 - Visualização de produtos
+- Criação de pedido de compra
 
 ## 👥 Alunos integrantes da equipe
 
