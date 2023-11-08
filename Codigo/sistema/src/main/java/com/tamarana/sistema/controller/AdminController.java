@@ -11,17 +11,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.function.RequestPredicates.Visitor;
 
 import com.tamarana.sistema.model.Animal;
 
 import com.tamarana.sistema.model.Produto;
 import com.tamarana.sistema.model.Venda;
+import com.tamarana.sistema.model.Visita;
 import com.tamarana.sistema.model.usuario.Usuario;
 import com.tamarana.sistema.repositories.AnimalRep;
 
 import com.tamarana.sistema.repositories.ProdutoRep;
 import com.tamarana.sistema.repositories.UserRepository;
 import com.tamarana.sistema.repositories.VendaRep;
+import com.tamarana.sistema.repositories.VisitaRep;
 import com.tamarana.sistema.services.CookieService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +44,9 @@ public class AdminController {
 
     @Autowired
     private VendaRep repVenda;
+
+     @Autowired
+    private VisitaRep repVisita;
 
     @GetMapping("/admin")
     public String index(Model model, HttpServletRequest request) {
@@ -296,4 +302,31 @@ public class AdminController {
         return "redirect:/admin/gerenciarPedidos";
     }
 
+      // GERENCIAR VISITAS
+    @GetMapping("/admin/gerenciarVisitas")
+    public String gerenciarVisitas(Model model, HttpServletRequest request) {
+        String roleAdmin = CookieService.getCookie(request, "role");
+        String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
+        if (roleAdmin.equals("admin")) {
+            List<Visita> listaVisitas = (List<Visita>) repVisita.findAll();
+            model.addAttribute("listaVisitas", listaVisitas);
+          
+       
+            model.addAttribute("roleAdmin", roleAdmin);
+            model.addAttribute("nomeAdmin", nomeAdmin);
+            return "admin/gerenciarVisitas";
+        }
+        return "admin/login";
+    }
+
+      // REMOVER VISITA
+    @GetMapping("/admin/{id}/removerVisita")
+    public String removerVisita(@PathVariable int id) {
+        try {
+            repVisita.deleteById(id);
+        } catch (NonTransientDataAccessException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/admin/gerenciarVisitas";
+    }
 }
