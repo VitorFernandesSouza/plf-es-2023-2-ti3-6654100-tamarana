@@ -46,7 +46,7 @@
                         Animais</a>
                 </li>
                 <li class="sidebar-opcao">
-                    <a href="/admin/gerenciarPedidos"  style="color: white; background-color: green">Gerenciar
+                    <a href="/admin/gerenciarPedidos"  style="color: black;">Gerenciar
                         Pedidos</a>
                 </li>
                 <li class="sidebar-opcao">
@@ -54,7 +54,7 @@
                         Visitas</a>
                 </li>
                 <li class="sidebar-opcao">
-                    <a href="/admin/historicoVendas" style="color: black;">Histórico de vendas</a>
+                    <a href="/admin/historicoVendas" style="color: white; background-color: green">Histórico de vendas</a>
                 </li>
                 <li class="sidebar-opcao">
                     <a href="/adminSair" style="color: black;"
@@ -96,11 +96,11 @@
                                                         <th class="topo"><span>Descricao</span></th>
                                                         <th class="topo"><span>Valor</span></th>
                                                         <th class="topo"><span>Status</span></th>
-                                                        <th class="topo"><span>Ações</span></th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr th:each="venda : ${listaVendas}" th:if="${venda.descricao != null && venda.status == 'pendente'}">
+                                                    <tr th:each="venda : ${listaVendas}" th:if="${venda.descricao != null && venda.status == 'confirmada'}">
                                                         <td th:text="${venda.id}"></td>
                                                         <td th:text="${venda.usuario.getEmail}"></td>
                                                         <td>
@@ -111,17 +111,7 @@
                                                             <span th:text="${venda.status}"></span>
                                                         </td>
                                                         
-                                                        <td style="width: 20%;">
-                                                            <!-- th:href="@{'/admin/' + ${usuario.id}}" -->
-                                                           
-                                                            <a href="#"
-                                                            th:onclick="'if(confirm(\'Confirmar venda?\')) {window.location.href = \'' + @{/admin/{id}(id=${venda.id})} + '/confirmar\'}'">
-                                                            <i class="fa-solid fa-check fa-lg" style="color: #21de50;" title="confirmar"></i></a>
-                                                            <a href="#"
-                                                                th:onclick="'if(confirm(\'Remover pedido?\')) {window.location.href = \'' + @{/admin/{id}(id=${venda.id})} + '/removerPedido\'}'"><i
-                                                                    class="fa-solid fa-trash fa-lg"
-                                                                    style="color: #f00000;" title="Remover"></i></a>
-                                                        </td>
+                                                      
                                                     </tr>
                                                 </tbody>
                                             </table>

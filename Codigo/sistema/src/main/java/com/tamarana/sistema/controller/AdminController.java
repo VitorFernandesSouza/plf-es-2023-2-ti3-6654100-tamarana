@@ -257,7 +257,7 @@ public class AdminController {
         return "redirect:/admin/gerenciarAnimais";
     }
 
-     // GERENCIAR PEDIDOS
+    // GERENCIAR PEDIDOS
     @GetMapping("/admin/gerenciarPedidos")
     public String gerenciarPedidos(Model model, HttpServletRequest request) {
         String roleAdmin = CookieService.getCookie(request, "role");
@@ -328,5 +328,22 @@ public class AdminController {
             e.printStackTrace();
         }
         return "redirect:/admin/gerenciarVisitas";
+    }
+
+    // HISTORICO VENDAS
+    @GetMapping("/admin/historicoVendas")
+    public String historicoVendas(Model model, HttpServletRequest request) {
+        String roleAdmin = CookieService.getCookie(request, "role");
+        String nomeAdmin = CookieService.getCookie(request, "nomeUsuario");
+        if (roleAdmin.equals("admin")) {
+            List<Venda> listaVendas = (List<Venda>) repVenda.findAll();
+            model.addAttribute("listaVendas", listaVendas);
+          
+       
+            model.addAttribute("roleAdmin", roleAdmin);
+            model.addAttribute("nomeAdmin", nomeAdmin);
+            return "admin/historicoVendas";
+        }
+        return "admin/login";
     }
 }
